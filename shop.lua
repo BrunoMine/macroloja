@@ -1,7 +1,13 @@
-
--- Criar verificador se o bau está sendo editado
-
--- Verificador de ultimo bau
+--[[
+	Mod MacroLoja para Minetest
+	Copyright (C) 2017 BrunoMine (https://github.com/BrunoMine)
+	
+	Recebeste uma cópia da GNU Lesser General
+	Public License junto com esse software,
+	se não, veja em <http://www.gnu.org/licenses/>. 
+	
+	Bau de trocas
+  ]]
 
 
 -- Privilegio para administradores verem e mexerem nos baus
