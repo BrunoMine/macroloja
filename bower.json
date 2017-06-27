@@ -1,0 +1,14 @@
+{
+    "name": "macroloja",
+    "description": "Bau de troca de itens para lojas em Minetest",
+    "keywords": [
+        "macroloja"
+    ],
+    "homepage": "https://github.com/BrunoMine/macroloja",
+    "screenshots": [
+        "https://raw.githubusercontent.com/BrunoMine/macroloja/master/screenshot.png"
+    ],
+    "authors": [
+        "BrunoMine"
+    ]
+}
