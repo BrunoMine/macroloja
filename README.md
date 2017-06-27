@@ -16,7 +16,7 @@ Adiciona um bau de troca de itens para lojas
 
 ## Requisitos
 
-* Minetest 0.4.16 ou superior
+* Minetest 0.4.15 ou superior
 * Mod default
 * Mod wool
 
