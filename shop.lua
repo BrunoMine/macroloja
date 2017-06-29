@@ -10,9 +10,6 @@
   ]]
 
 
--- Privilegio para administradores verem e mexerem nos baus
-minetest.register_privilege("macroloja_admin", "Mexer em todos os baus de venda")
-
 
 -- Controle de bau acessado
 local acesso_bau = {}
@@ -177,7 +174,7 @@ minetest.register_node("macroloja:shop", {
 	
 	can_dig = function(pos, player)
 		if player:get_player_name() == minetest.get_meta(pos):get_string("dono") 
-			or minetest.check_player_privs(player:get_player_name(), {macroloja_admin=true})
+			or minetest.check_player_privs(player:get_player_name(), {protection_bypass=true})
 		then
 			return true
 		else
@@ -213,7 +210,7 @@ minetest.register_node("macroloja:shop", {
 		
 		-- Acesso do dono
 		if name == minetest.get_meta(pos):get_string("dono") 
-			or minetest.check_player_privs(name, {macroloja_admin=true})
+			or minetest.check_player_privs(name, {protection_bypass=true})
 		then
 			
 			-- Exibe formspec
@@ -317,17 +314,17 @@ minetest.register_node("macroloja:shop", {
 	-- Verificar permissão de acesso ao bau
 	allow_metadata_inventory_move = function(pos, from_list, from_index, to_list, to_index, count, player)
 		if player:get_player_name() == minetest.get_meta(pos):get_string("dono") 
-			or minetest.check_player_privs(player:get_player_name(), {macroloja_admin=true})
+			or minetest.check_player_privs(player:get_player_name(), {protection_bypass=true})
 		then return count else return 0 end
 	end,
 	allow_metadata_inventory_put = function(pos, listname, index, stack, player)
 		if player:get_player_name() == minetest.get_meta(pos):get_string("dono") 
-			or minetest.check_player_privs(player:get_player_name(), {macroloja_admin=true})
+			or minetest.check_player_privs(player:get_player_name(), {protection_bypass=true})
 		then return stack:get_count() else return 0 end
 	end,
 	allow_metadata_inventory_take = function(pos, listname, index, stack, player)
 		if player:get_player_name() == minetest.get_meta(pos):get_string("dono") 
-			or minetest.check_player_privs(player:get_player_name(), {macroloja_admin=true})
+			or minetest.check_player_privs(player:get_player_name(), {protection_bypass=true})
 		then return stack:get_count() else return 0 end
 	end,
 	
