@@ -63,19 +63,19 @@ local trocar = function(inv_comprador, list_pagante, list_recebedor, inv_vendedo
 		end
 	end
 	
-	-- Verificar se vendedor consegue vender
+	-- Verificar se vendedor consegue vender [DESATIVADO PARA ADMIN]
 	-- Verifica se vendedor possui estoque
-	for item, qtd in pairs(tb_oferta) do
-		if inv_vendedor:contains_item(list_estoque, item.." "..qtd) == false then
-			return 3
-		end
-	end
+	-- for item, qtd in pairs(tb_oferta) do
+	-- 	if inv_vendedor:contains_item(list_estoque, item.." "..qtd) == false then
+	-- 		return 3
+	-- 	end
+	-- end
 	-- Verifica se vendedor esta lotado
-	for item, qtd in pairs(tb_custo) do
-		if inv_vendedor:room_for_item(list_lucro, item.." "..qtd) == false then
-			return 2
-		end
-	end
+	-- for item, qtd in pairs(tb_custo) do
+	-- 	if inv_vendedor:room_for_item(list_lucro, item.." "..qtd) == false then
+	-- 		return 2
+	-- 	end
+	-- end
 	
 	-- Veriica se o comprador consegue comprar
 	-- Verifica se comprador consegue pagar
@@ -96,13 +96,13 @@ local trocar = function(inv_comprador, list_pagante, list_recebedor, inv_vendedo
 	for item, qtd in pairs(tb_custo) do
 		-- Retira itens do comprador
 		inv_comprador:remove_item(list_pagante, item.." "..qtd)
-		-- Adiciona itens ao vendedor
-		inv_vendedor:add_item(list_lucro, item.." "..qtd)
+		-- Adiciona itens ao vendedor [DESATIVADO PARA ADMIN]
+		-- inv_vendedor:add_item(list_lucro, item.." "..qtd)
 	end
 	-- Retira itens do vendedor e passa para o comprador
 	for item, qtd in pairs(tb_oferta) do
-		-- Retira itens do vendedor
-		inv_vendedor:remove_item(list_estoque, item.." "..qtd)
+		-- Retira itens do vendedor [DESATIVADO PARA ADMIN]
+		-- inv_vendedor:remove_item(list_estoque, item.." "..qtd)
 		-- Adiciona itens ao comprador
 		inv_comprador:add_item(list_recebedor, item.." "..qtd)
 	end
@@ -148,9 +148,9 @@ local verif_bau_ativo = function(pos)
 end
 
 -- Bau de venda
-minetest.register_node("macroloja:shop", {
+minetest.register_node("macroloja:shop_admin", {
 
-	description = "Bau de Venda",
+	description = "Bau de Venda Administrativo",
 	paramtype2 = "facedir",
 	tiles = {
 		"default_chest_top.png",
@@ -173,8 +173,7 @@ minetest.register_node("macroloja:shop", {
 	
 	
 	can_dig = function(pos, player)
-		if player:get_player_name() == minetest.get_meta(pos):get_string("dono") 
-			or minetest.check_player_privs(player:get_player_name(), {protection_bypass=true})
+		if minetest.check_player_privs(player:get_player_name(), {protection_bypass=true})
 		then
 			return true
 		else
@@ -186,8 +185,7 @@ minetest.register_node("macroloja:shop", {
 	
 		-- Salvar metadados iniciais
 		local meta = minetest.get_meta(pos)
-		meta:set_string("infotext", "Bau de Venda (Vendedor "..placer:get_player_name()..")")
-		meta:set_string("dono", placer:get_player_name())
+		meta:set_string("infotext", "Bau de Venda")
 		meta:set_string("status", "inativo")
 		meta:set_float("vendas", 0)
 		
@@ -209,12 +207,10 @@ minetest.register_node("macroloja:shop", {
 		acesso_bau[name] = pos
 		
 		-- Acesso do dono
-		if name == minetest.get_meta(pos):get_string("dono") 
-			or minetest.check_player_privs(name, {protection_bypass=true})
-		then
+		if minetest.check_player_privs(name, {protection_bypass=true}) then
 			
 			-- Exibe formspec
-			minetest.show_formspec(name, "macroloja:shop_dono", 
+			minetest.show_formspec(name, "macroloja:shop_admin_dono", 
 				"size[10,9]"
 				
 				-- Inventario do jogador
@@ -226,27 +222,27 @@ minetest.register_node("macroloja:shop", {
 				.."listring[current_player;main]"
 				..default.get_hotbar_bg(1,4.85)
 				
-				-- Estoque
-				.."label[0,-0.1;Estoque]"
-				.."list[nodemeta:"..pos.x..","..pos.y..","..pos.z..";estoque;0,0.3;2,4;]"
-				.."listring[nodemeta:"..pos.x..","..pos.y..","..pos.z..";estoque]"
+				-- Estoque [CANCELADO PARA ADMIN]
+				-- .."label[0,-0.1;Estoque]"
+				-- .."list[nodemeta:"..pos.x..","..pos.y..","..pos.z..";estoque;0,0.3;2,4;]"
+				-- .."listring[nodemeta:"..pos.x..","..pos.y..","..pos.z..";estoque]"
 				
-				-- Lucro
-				.."label[8,-0.1;Lucro]"
-				.."list[nodemeta:"..pos.x..","..pos.y..","..pos.z..";lucro;8,0.3;2,4;]"
-				.."listring[nodemeta:"..pos.x..","..pos.y..","..pos.z..";lucro]"
+				-- Lucro [CANCELADO PARA ADMIN]
+				-- .."label[8,-0.1;Lucro]"
+				-- .."list[nodemeta:"..pos.x..","..pos.y..","..pos.z..";lucro;8,0.3;2,4;]"
+				-- .."listring[nodemeta:"..pos.x..","..pos.y..","..pos.z..";lucro]"
 				
 				-- Oferta
 				.."label[3,0.3;Oferta]"
 				.."list[nodemeta:"..pos.x..","..pos.y..","..pos.z..";oferta;3,0.8;4,1;]"
 				.."listring[nodemeta:"..pos.x..","..pos.y..","..pos.z..";oferta]"
-				.."image[2,0.8;1,1;gui_furnace_arrow_bg.png^[transformR270]"
+				-- .."image[2,0.8;1,1;gui_furnace_arrow_bg.png^[transformR270]"
 				
 				-- Custo
 				.."label[3,2.3;Custo]"
 				.."list[nodemeta:"..pos.x..","..pos.y..","..pos.z..";custo;3,2.8;4,1;]"
 				.."listring[nodemeta:"..pos.x..","..pos.y..","..pos.z..";custo]"
-				.."image[7,2.8;1,1;gui_furnace_arrow_bg.png^[transformR270]"
+				-- .."image[7,2.8;1,1;gui_furnace_arrow_bg.png^[transformR270]"
 				
 				-- Seta pra baixo
 				.."image[4.5,1.8;1,1;gui_furnace_arrow_bg.png^[transformR180]"
@@ -264,7 +260,7 @@ minetest.register_node("macroloja:shop", {
 		end
 		
 		-- Exibe formspec
-		minetest.show_formspec(name, "macroloja:shop", 
+		minetest.show_formspec(name, "macroloja:shop_admin", 
 			"size[8,9]"
 			
 			-- Inventario do jogador
@@ -313,18 +309,14 @@ minetest.register_node("macroloja:shop", {
 	
 	-- Verificar permissão de acesso ao bau
 	allow_metadata_inventory_move = function(pos, from_list, from_index, to_list, to_index, count, player)
-		if player:get_player_name() == minetest.get_meta(pos):get_string("dono") 
-			or minetest.check_player_privs(player:get_player_name(), {protection_bypass=true})
-		then return count else return 0 end
+		if minetest.check_player_privs(player:get_player_name(), {protection_bypass=true}) then return count else return 0 end
 	end,
 	allow_metadata_inventory_put = function(pos, listname, index, stack, player)
-		if player:get_player_name() == minetest.get_meta(pos):get_string("dono") 
-			or minetest.check_player_privs(player:get_player_name(), {protection_bypass=true})
+		if minetest.check_player_privs(player:get_player_name(), {protection_bypass=true})
 		then return stack:get_count() else return 0 end
 	end,
 	allow_metadata_inventory_take = function(pos, listname, index, stack, player)
-		if player:get_player_name() == minetest.get_meta(pos):get_string("dono") 
-			or minetest.check_player_privs(player:get_player_name(), {protection_bypass=true})
+		if minetest.check_player_privs(player:get_player_name(), {protection_bypass=true})
 		then return stack:get_count() else return 0 end
 	end,
 	
@@ -346,7 +338,7 @@ minetest.register_node("macroloja:shop", {
 minetest.register_on_player_receive_fields(function(player, formname, fields)
 	
 	-- Clientes
-	if formname == "macroloja:shop" then
+	if formname == "macroloja:shop_admin" then
 		local name = player:get_player_name()
 		local pos = acesso_bau[name]
 		local meta = minetest.get_meta(pos)
@@ -426,14 +418,4 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 		end
 	end
 end)
-
--- Bau de Venda
-minetest.register_craft({
-	output = 'macroloja:shop',
-	recipe = {
-		{'wool:green', 'wool:white', 'wool:green'},
-		{'wool:blue', 'default:chest_locked', 'wool:blue'},
-		{'default:wood', 'default:wood', 'default:wood'},
-	}
-})
 

@@ -23,8 +23,9 @@ macroloja = {}
 
 -- Carregar scripts
 notificar("Carregando...")
-dofile(modpath.."/shop.lua")
 dofile(modpath.."/drop.lua")
+dofile(modpath.."/shop.lua")
+dofile(modpath.."/shop_admin.lua")
 notificar("OK")
 
 
