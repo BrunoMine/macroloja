@@ -1,6 +1,6 @@
-# Macroloja v1.0.1
+# Macroloja v1.0.2
 
-[![Baixar](https://img.shields.io/badge/Baixar-v1.0.1-green.svg)](https://github.com/BrunoMine/macroloja/archive/v1.0.1.zip)
+[![Baixar](https://img.shields.io/badge/Baixar-v1.0.2-green.svg)](https://github.com/BrunoMine/macroloja/archive/v1.0.2.zip)
 [![Projeto](https://img.shields.io/badge/Git-Projeto-green.svg)](https://github.com/BrunoMine/macroloja)
 [![!Bower](https://img.shields.io/badge/Bower-Projeto-green.svg)](https://minetest-bower.herokuapp.com/mods/macroloja)
 [![Licença](https://img.shields.io/badge/Licença-LGPL_v3.0-blue.svg)](https://github.com/BrunoMine/macroloja/blob/master/LICENSE)
@@ -10,7 +10,7 @@ Adiciona um bau de troca de itens para lojas
 
 ## Recursos do projeto
 
-* [Baixar](https://github.com/BrunoMine/macroloja/archive/v1.0.1.zip)
+* [Baixar](https://github.com/BrunoMine/macroloja/archive/master.zip)
 * [Projeto](https://github.com/BrunoMine/macroloja)
 * [Bower](https://minetest-bower.herokuapp.com/mods/macroloja)
 
